@@ -155,12 +155,12 @@ class EmailDemo:
                                         try:
                                             body = part.get_payload(decode=True).decode()
                                             break
-                                        except:
+                                        except Exception:
                                             pass
                             else:
                                 try:
                                     body = msg.get_payload(decode=True).decode()
-                                except:
+                                except Exception:
                                     body = msg.get_payload()
                             
                             # Log email details
