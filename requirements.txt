@@ -1,2 +1,4 @@
 # Python Email Demo - No external dependencies required
 # All necessary libraries are part of Python's standard library
+
+python-dotenv>=0.21.0
