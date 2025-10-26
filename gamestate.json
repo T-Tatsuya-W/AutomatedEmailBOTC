@@ -1,4 +1,256 @@
 {
-  "phase": "DAY0",
-  "players": []
+  "phase": "DAY2",
+  "players": [
+    {
+      "number": 1,
+      "name": "player1",
+      "email": "tobytw312@gmail.com",
+      "alive": true,
+      "hasGhostVote": true,
+      "drunk": false,
+      "poisoned": false,
+      "roleClass": "demon",
+      "roleName": "Imp"
+    },
+    {
+      "number": 2,
+      "name": "player2",
+      "email": "tobytw312@gmail.com",
+      "alive": false,
+      "hasGhostVote": true,
+      "drunk": false,
+      "poisoned": false,
+      "roleClass": "townsfolk",
+      "roleName": "Soldier"
+    },
+    {
+      "number": 3,
+      "name": "player3",
+      "email": "tobytw312@gmail.com",
+      "alive": true,
+      "hasGhostVote": true,
+      "drunk": false,
+      "poisoned": false,
+      "roleClass": "townsfolk",
+      "roleName": "Librarian"
+    }
+  ],
+  "phase_updates": {
+    "REGISTRATION": {
+      "sent": null,
+      "responses": {
+        "1": {
+          "from": "tobytw312@gmail.com",
+          "text": "I'm in."
+        },
+        "3": {
+          "from": "tobytw312@gmail.com",
+          "text": "I'm in."
+        },
+        "2": {
+          "from": "tobytw312@gmail.com",
+          "text": "I'm in."
+        }
+      },
+      "actions": [],
+      "announcements": ""
+    },
+    "NIGHT0": {
+      "sent": "BOTC First Night: NIGHT0\n\nPlayers:\n1: player1\n2: player2\n3: player3\n\nReply instructions: Respond based on your role.",
+      "responses": {
+        "1": {
+          "from": "tobytw312@gmail.com",
+          "text": "On Sun, 26 Oct 2025 at 21:16, <totagamehost@gmail.com> wrote:"
+        },
+        "2": {
+          "from": "tobytw312@gmail.com",
+          "text": "Success!"
+        },
+        "3": {
+          "from": "tobytw312@gmail.com",
+          "text": "I'm done."
+        }
+      },
+      "actions": [],
+      "announcements": "",
+      "phase_type": "first_night",
+      "completed": true,
+      "player_snapshot": {
+        "alive_count": 3,
+        "dead_count": 0,
+        "players": [
+          {
+            "number": 1,
+            "name": "player1",
+            "alive": true,
+            "roleClass": "demon",
+            "roleName": "Imp"
+          },
+          {
+            "number": 2,
+            "name": "player2",
+            "alive": true,
+            "roleClass": "townsfolk",
+            "roleName": "Soldier"
+          },
+          {
+            "number": 3,
+            "name": "player3",
+            "alive": true,
+            "roleClass": "townsfolk",
+            "roleName": "Librarian"
+          }
+        ]
+      }
+    },
+    "DAY1": {
+      "sent": "BOTC Day Phase: DAY1\n\nPlayers:\n1: player1\n2: player2\n3: player3\n\nReply instructions: Respond with one line.",
+      "responses": {
+        "1": {
+          "from": "tobytw312@gmail.com",
+          "text": "Correct!"
+        },
+        "2": {
+          "from": "tobytw312@gmail.com",
+          "text": "Just one."
+        },
+        "3": {
+          "from": "tobytw312@gmail.com",
+          "text": "Correct!"
+        }
+      },
+      "actions": [],
+      "announcements": "",
+      "phase_type": "day",
+      "completed": true,
+      "player_snapshot": {
+        "alive_count": 3,
+        "dead_count": 0,
+        "players": [
+          {
+            "number": 1,
+            "name": "player1",
+            "alive": true,
+            "roleClass": "demon",
+            "roleName": "Imp"
+          },
+          {
+            "number": 2,
+            "name": "player2",
+            "alive": true,
+            "roleClass": "townsfolk",
+            "roleName": "Soldier"
+          },
+          {
+            "number": 3,
+            "name": "player3",
+            "alive": true,
+            "roleClass": "townsfolk",
+            "roleName": "Librarian"
+          }
+        ]
+      }
+    },
+    "NIGHT1": {
+      "sent": "BOTC Night Phase: NIGHT1\n\nPlayers:\n1: player1\n2: player2\n3: player3\n\nReply instructions: Respond with one line.",
+      "responses": {
+        "1": {
+          "from": "tobytw312@gmail.com",
+          "text": "2"
+        },
+        "2": {
+          "from": "tobytw312@gmail.com",
+          "text": "Let's go!"
+        },
+        "3": {
+          "from": "tobytw312@gmail.com",
+          "text": "Just one."
+        }
+      },
+      "actions": [
+        {
+          "type": "kill",
+          "details": {
+            "by": 1,
+            "target": 2
+          },
+          "applied": true,
+          "result": {
+            "target": 2,
+            "target_name": "player2"
+          }
+        }
+      ],
+      "announcements": "",
+      "phase_type": "night",
+      "completed": true,
+      "player_snapshot": {
+        "alive_count": 3,
+        "dead_count": 0,
+        "players": [
+          {
+            "number": 1,
+            "name": "player1",
+            "alive": true,
+            "roleClass": "demon",
+            "roleName": "Imp"
+          },
+          {
+            "number": 2,
+            "name": "player2",
+            "alive": true,
+            "roleClass": "townsfolk",
+            "roleName": "Soldier"
+          },
+          {
+            "number": 3,
+            "name": "player3",
+            "alive": true,
+            "roleClass": "townsfolk",
+            "roleName": "Librarian"
+          }
+        ]
+      }
+    },
+    "DAY2": {
+      "sent": "BOTC Day Phase: DAY2\n\nPlayers:\n1: player1\n2: player2 (dead)\n3: player3\n\nReply instructions: Respond with one line.",
+      "responses": {},
+      "actions": [],
+      "announcements": "player2 was killed",
+      "phase_type": "day",
+      "completed": false,
+      "player_snapshot": {
+        "alive_count": 2,
+        "dead_count": 1,
+        "players": [
+          {
+            "number": 1,
+            "name": "player1",
+            "alive": true,
+            "roleClass": "demon",
+            "roleName": "Imp"
+          },
+          {
+            "number": 2,
+            "name": "player2",
+            "alive": false,
+            "roleClass": "townsfolk",
+            "roleName": "Soldier"
+          },
+          {
+            "number": 3,
+            "name": "player3",
+            "alive": true,
+            "roleClass": "townsfolk",
+            "roleName": "Librarian"
+          }
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "created_at": "2025-10-26T21:15:02.978831",
+    "last_updated": "2025-10-26T21:19:11.641980",
+    "version": "1.0"
+  }
 }

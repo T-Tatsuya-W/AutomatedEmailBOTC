@@ -10,11 +10,15 @@ import sys
 import getpass
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from typing import List, Optional
+import logging
 from dotenv import load_dotenv
 
 load_dotenv()
 
-DEFAULT_SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
+# prefer SMTP_HOST, fall back to SMTP_SERVER, keep default for Gmail
+DEFAULT_SMTP_HOST = os.getenv("SMTP_HOST") or os.getenv("SMTP_SERVER") or "smtp.gmail.com"
 DEFAULT_SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
 # Add a default test recipient: read DEFAULT_TO from .env or fall back to the sender address (if set)
 DEFAULT_TEST_TO = os.getenv("DEFAULT_TO") or os.getenv("TO_EMAIL_ADDRESS") or "tobytw312@gmail.com"
@@ -28,6 +32,64 @@ def _get_credentials():
     if not pwd:
         pwd = getpass.getpass("Email password (app password): ").strip()
     return addr, pwd
+
+class EmailSender:
+    """Handles sending emails via SMTP"""
+    
+    def __init__(self, smtp_server: str, smtp_port: int, 
+                 sender_email: str, sender_password: str):
+        self.smtp_server = smtp_server
+        self.smtp_port = smtp_port
+        self.sender_email = sender_email
+        self.sender_password = sender_password
+        self.logger = logging.getLogger(__name__)
+        
+    def send_email(self, recipient_email: str, subject: str, 
+                   body: str, cc: Optional[List[str]] = None) -> bool:
+        """Send an email to a recipient"""
+        try:
+            msg = MIMEMultipart()
+            msg['From'] = self.sender_email
+            msg['To'] = recipient_email
+            msg['Subject'] = subject
+            
+            if cc:
+                msg['Cc'] = ', '.join(cc)
+                
+            msg.attach(MIMEText(body, 'plain'))
+            
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.sender_email, self.sender_password)
+                
+                recipients = [recipient_email]
+                if cc:
+                    recipients.extend(cc)
+                    
+                server.send_message(msg)
+                
+            self.logger.info(f"Email sent successfully to {recipient_email}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Failed to send email to {recipient_email}: {e}")
+            return False
+            
+    def send_bulk_emails(self, emails: List[tuple]) -> dict:
+        """
+        Send multiple emails
+        emails: List of (recipient_email, subject, body) tuples
+        Returns: dict with success/failure counts
+        """
+        results = {'success': 0, 'failed': 0}
+        
+        for recipient, subject, body in emails:
+            if self.send_email(recipient, subject, body):
+                results['success'] += 1
+            else:
+                results['failed'] += 1
+                
+        return results
 
 def sendemail(to, subject, message, from_addr=None, password=None,
               smtp_host=DEFAULT_SMTP_HOST, smtp_port=DEFAULT_SMTP_PORT, timeout=30):
